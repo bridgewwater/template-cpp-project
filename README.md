@@ -1,4 +1,5 @@
 [![ci](https://github.com/bridgewwater/template-cpp-project/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/bridgewwater/template-cpp-project/actions/workflows/ci.yml)
+[![codecov-cpp](https://github.com/bridgewwater/template-cpp-project/actions/workflows/codecov-cpp.yml/badge.svg?branch=main)](https://github.com/bridgewwater/template-cpp-project/actions/workflows/codecov-cpp.yml)
 [![codecov](https://codecov.io/gh/bridgewwater/template-cpp-project/branch/main/graph/badge.svg)](https://codecov.io/gh/bridgewwater/template-cpp-project)
 
 ## boilerplate for C++ projects
