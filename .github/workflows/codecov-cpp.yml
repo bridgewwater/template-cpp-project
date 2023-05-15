@@ -13,7 +13,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: install tools ( Coverage )
-      run: apt install -y doxygen graphviz gcovr lcov
+      run: sudo apt install -y doxygen graphviz gcovr lcov
 
     - name: Configure ( Coverage )
       run: cmake -S . -Bbuild -DCMAKE_BUILD_TYPE=Coverage
