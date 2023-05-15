@@ -19,7 +19,7 @@ This is a boilerplate for C++ projects. What you get:
 
 ### setup
 
-- install `doxygen`
+> tips: install gcc g++ cmake not show at here
 
 ```bash
 # macOS
