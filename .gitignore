@@ -3,6 +3,10 @@
 *.log
 build/
 dist/
+Testing/
+
+### cmake by idea
+cmake-build-debug/
 
 ### IDE
 

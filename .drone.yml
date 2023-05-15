@@ -33,6 +33,34 @@ steps:
       - g++ -v
       - doxygen -v
       - dot -V
+  - name: cmake-build-debug
+    image: sinlov/docker-cpp-boilerplate:11.7.0-debian # https://hub.docker.com/r/sinlov/docker-cpp-boilerplate/tags
+    pull: if-not-exists
+    depends_on: # https://docs.drone.io/pipeline/exec/syntax/parallelism/
+      - cmake-init
+    commands:
+      - cmake -S . -Bbuild -DCMAKE_BUILD_TYPE=Debug
+      - cmake --build build
+  - name: cmake-test-debug
+    image: sinlov/docker-cpp-boilerplate:11.7.0-debian # https://hub.docker.com/r/sinlov/docker-cpp-boilerplate/tags
+    pull: if-not-exists
+    depends_on: # https://docs.drone.io/pipeline/exec/syntax/parallelism/
+      - cmake-init
+      - cmake-build-debug
+    commands:
+      - cmake -S . -Bbuild -DCMAKE_BUILD_TYPE=Debug
+      - cmake --build build
+      - cd build && make test
+  - name: cmake-coverage
+    image: sinlov/docker-cpp-boilerplate:11.7.0-debian # https://hub.docker.com/r/sinlov/docker-cpp-boilerplate/tags
+    pull: if-not-exists
+    depends_on: # https://docs.drone.io/pipeline/exec/syntax/parallelism/
+      - cmake-init
+      - cmake-build-debug
+    commands:
+      - cmake -S . -Bbuild -DCMAKE_BUILD_TYPE=Coverage
+      - cmake --build build
+      - cd build && make coverage
 
 trigger: # https://docs.drone.io/pipeline/triggers/
   # branch:

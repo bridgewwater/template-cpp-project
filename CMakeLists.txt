@@ -7,7 +7,7 @@
 
 cmake_minimum_required(VERSION 3.14)
 
-# Set project name, version and laguages here. (change as needed)
+# Set project name, version and languages here. (change as needed)
 # Version numbers are available by including "exampleConfig.h" in
 # the source. See exampleConfig.h.in for some more details.
 project(CPP_BOILERPLATE VERSION 1.2.3.4 LANGUAGES CXX)
@@ -72,7 +72,7 @@ target_enable_lto(main optimized)  # enable link-time-optimization if available 
 set_target_properties(
     ${LIBRARY_NAME} main
       PROPERTIES
-        CXX_STANDARD 17
+        CXX_STANDARD 11
         CXX_STANDARD_REQUIRED YES
         CXX_EXTENSIONS NO
 )

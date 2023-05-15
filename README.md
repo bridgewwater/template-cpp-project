@@ -9,7 +9,9 @@ This is a boilerplate for C++ projects. What you get:
   - Code coverage for CMake `only support Compiler GNU gcc or Clang`
 - Code documentation with [Doxygen](http://www.stack.nl/~dimitri/doxygen/)
   - Code coverage report use [lcov](https://github.com/linux-test-project/lcov)
-
+- default `target_properties`
+  - `CMAKE_CXX_STANDARD 11`
+  - `CXX_EXTENSIONS NO`
 
 ### setup
 
@@ -48,8 +50,10 @@ Click the `Use this template` button to make a new repository from this template
 ├── src
 │   └── example.cpp
 └── tests
+    ├── CMakeLists.txt
     ├── dummy.cpp
     └── main.cpp
+
 ```
 
 Sources go in [src/](src/), header files in [include/](include/), main programs in [app/](app), and
@@ -75,11 +79,6 @@ Example:
 > mkdir build
 > cd build
 > cmake .. -DCMAKE_BUILD_TYPE=[Debug | Coverage | Release]
-
-# or
-> cmake -Bbuild -DCMAKE_BUILD_TYPE=Debug
-> cmake -Bbuild -DCMAKE_BUILD_TYPE=Coverage
-
 # into build folder
 > cd build
 > make
@@ -89,6 +88,21 @@ Example:
 > make test      # Makes and runs the tests.
 > make coverage  # Generate a coverage report. only run in CMAKE_BUILD_TYPE=Coverage
 > make doc       # Generate html documentation.
+
+# or like this
+# Configure
+> cmake -S . -Bbuild -DCMAKE_BUILD_TYPE=Debug
+> cmake --build build
+# into build folder
+> cd build
+# check out
+> ./main
+
+# Generate a coverage report. only run in CMAKE_BUILD_TYPE=Coverage
+# Configure
+> cmake -S . -Bbuild -DCMAKE_BUILD_TYPE=Coverage
+> cmake --build build
+> make coverage
 ```
 
 - windows with powershell use [msbuild](https://learn.microsoft.com/cpp/build/msbuild-visual-cpp)
