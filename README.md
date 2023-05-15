@@ -1,5 +1,3 @@
-# this project
-
 ## boilerplate for C++ projects
 
 This is a boilerplate for C++ projects. What you get:
@@ -10,6 +8,7 @@ This is a boilerplate for C++ projects. What you get:
 - Code coverage reports, including automatic upload to [Coveralls.io](https://coveralls.io/) and/or [Codecov.io](https://codecov.io)
   - Code coverage for CMake `only support Compiler GNU gcc or Clang`
 - Code documentation with [Doxygen](http://www.stack.nl/~dimitri/doxygen/)
+  - Code coverage report use [lcov](https://github.com/linux-test-project/lcov)
 
 
 ### setup
