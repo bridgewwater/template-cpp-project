@@ -4,11 +4,12 @@
 
 This is a boilerplate for C++ projects. What you get:
 
--   Sources, headers and mains separated in distinct folders
--   Use of modern [CMake](https://cmake.org/) for much easier compiling
--   Setup for tests using [doctest](https://github.com/onqtam/doctest)
--   Code coverage reports, including automatic upload to [Coveralls.io](https://coveralls.io/) and/or [Codecov.io](https://codecov.io)
--   Code documentation with [Doxygen](http://www.stack.nl/~dimitri/doxygen/)
+- Sources, headers and mains separated in distinct folders
+- Use of modern [CMake](https://cmake.org/) for much easier compiling
+- Setup for tests using [doctest](https://github.com/onqtam/doctest)
+- Code coverage reports, including automatic upload to [Coveralls.io](https://coveralls.io/) and/or [Codecov.io](https://codecov.io)
+  - Code coverage for CMake `only support Compiler GNU gcc or Clang`
+- Code documentation with [Doxygen](http://www.stack.nl/~dimitri/doxygen/)
 
 
 ### setup
@@ -19,11 +20,16 @@ This is a boilerplate for C++ projects. What you get:
 # macOS
 $ brew install doxygen lcov
 
-# windows
-$ scoop install main/doxygen
+# debian
+$ sudo apt install -y doxygen graphviz lcov
 
-# debain
-$ sudo apt install doxygen graphviz
+# windows please install visual studio and add msbuild to env:PATH
+> scoop install main/doxygen main/graphviz
+
+# check setup
+$ doxygen -v
+$ dot -V
+$ lcov -v
 ```
 
 ### Using the GitHub template
@@ -75,7 +81,8 @@ Example:
 > cmake -Bbuild -DCMAKE_BUILD_TYPE=Debug
 > cmake -Bbuild -DCMAKE_BUILD_TYPE=Coverage
 
-# at build folder
+# into build folder
+> cd build
 > make
 # then build pass
 # check out
@@ -83,4 +90,38 @@ Example:
 > make test      # Makes and runs the tests.
 > make coverage  # Generate a coverage report. only run in CMAKE_BUILD_TYPE=Coverage
 > make doc       # Generate html documentation.
+```
+
+- windows with powershell use [msbuild](https://learn.microsoft.com/cpp/build/msbuild-visual-cpp)
+
+```ps1
+> mkdir build
+> cd build
+> cmake .. -DCMAKE_BUILD_TYPE=[Debug | Coverage | Release]
+
+# remove build
+> Remove-Item -Recurse -Force .\build
+
+# build debug
+> cmake -Bbuild -DCMAKE_BUILD_TYPE=Debug
+# into build folder
+> cd .\build\
+# will new vs project with [ CPP_BOILERPLATE.sln ]
+> msbuild .\CPP_BOILERPLATE.sln /p:Configuration=Debug /t:main -m
+# output
+> .\Debug\main.exe
+# unit test
+> msbuild .\CPP_BOILERPLATE.sln /p:Configuration=Debug /t:unit_tests -m
+> .\Debug\unit_tests.exe
+
+# or relase
+> cmake -Bbuild -DCMAKE_BUILD_TYPE=Release
+# into build folder
+> cd .\build\
+> msbuild .\CPP_BOILERPLATE.sln /p:Configuration=Release /t:main -m
+# output
+> .\Release\main.exe
+> msbuild .\CPP_BOILERPLATE.sln /p:Configuration=Release /t:unit_tests -m
+# unit test
+> .\Release\unit_tests.exe
 ```
