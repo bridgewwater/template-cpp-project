@@ -1,3 +1,6 @@
+[![ci](https://github.com/bridgewwater/template-cpp-project/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/bridgewwater/template-cpp-project/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/bridgewwater/template-cpp-project/branch/main/graph/badge.svg)](https://codecov.io/gh/bridgewwater/template-cpp-project)
+
 ## boilerplate for C++ projects
 
 This is a boilerplate for C++ projects. What you get:
@@ -104,6 +107,8 @@ Example:
 > cmake --build build
 > make coverage
 ```
+
+### build as msbuild
 
 - windows with powershell use [msbuild](https://learn.microsoft.com/cpp/build/msbuild-visual-cpp)
 

@@ -1,0 +1,28 @@
+name: codecov-cpp
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    name: codecov
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Configure ( Coverage )
+      run: cmake -S . -Bbuild -DCMAKE_BUILD_TYPE=Coverage
+
+    - name: Build with Coverage
+      run: cmake --build build --config Coverage
+    - name: Generate coverage report
+      working-directory: build
+      run: make coverage
+
+    - name: Codecov
+      uses: codecov/codecov-action@v3.1.1
+      with:
+        token: ${{secrets.CODECOV_TOKEN}}
+        files: build/coverage_out.info
+#        verbose: true
