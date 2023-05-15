@@ -25,7 +25,7 @@ steps:
       - "echo \"=> drone info\nDRONE_WORKSPACE        ${DRONE_WORKSPACE}\nDRONE_REPO_NAME        ${DRONE_REPO_NAME}\nDRONE_REPO_OWNER       ${DRONE_REPO_OWNER}\nDRONE_REPO             ${DRONE_REPO}\""
       - "echo \"=> cvs   info\nDRONE_BRANCH           ${DRONE_BRANCH/\\//-}\nDRONE_COMMIT_SHA short ${DRONE_COMMIT_SHA:0:8}\nDRONE_TAG              ${DRONE_TAG##v}\""
   - name: cmake-init
-    image: sinlov/docker-cpp-boilerplate:11.7.0-debian # https://hub.docker.com/r/sinlov/docker-cpp-boilerplate/tags
+    image: sinlov/docker-cpp-boilerplate:11.7.2-debian # https://hub.docker.com/r/sinlov/docker-cpp-boilerplate/tags
     pull: if-not-exists
     commands:
       - cmake --version
@@ -34,7 +34,7 @@ steps:
       - doxygen -v
       - dot -V
   - name: cmake-build-debug
-    image: sinlov/docker-cpp-boilerplate:11.7.0-debian # https://hub.docker.com/r/sinlov/docker-cpp-boilerplate/tags
+    image: sinlov/docker-cpp-boilerplate:11.7.2-debian # https://hub.docker.com/r/sinlov/docker-cpp-boilerplate/tags
     pull: if-not-exists
     depends_on: # https://docs.drone.io/pipeline/exec/syntax/parallelism/
       - cmake-init
@@ -42,7 +42,7 @@ steps:
       - cmake -S . -Bbuild -DCMAKE_BUILD_TYPE=Debug
       - cmake --build build
   - name: cmake-test-debug
-    image: sinlov/docker-cpp-boilerplate:11.7.0-debian # https://hub.docker.com/r/sinlov/docker-cpp-boilerplate/tags
+    image: sinlov/docker-cpp-boilerplate:11.7.2-debian # https://hub.docker.com/r/sinlov/docker-cpp-boilerplate/tags
     pull: if-not-exists
     depends_on: # https://docs.drone.io/pipeline/exec/syntax/parallelism/
       - cmake-init
@@ -52,7 +52,7 @@ steps:
       - cmake --build build
       - cd build && make test
   - name: cmake-coverage
-    image: sinlov/docker-cpp-boilerplate:11.7.0-debian # https://hub.docker.com/r/sinlov/docker-cpp-boilerplate/tags
+    image: sinlov/docker-cpp-boilerplate:11.7.2-debian # https://hub.docker.com/r/sinlov/docker-cpp-boilerplate/tags
     pull: if-not-exists
     depends_on: # https://docs.drone.io/pipeline/exec/syntax/parallelism/
       - cmake-init

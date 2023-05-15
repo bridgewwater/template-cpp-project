@@ -15,6 +15,9 @@ jobs:
     - name: install tools ( Coverage )
       run: sudo apt install -y doxygen graphviz gcovr lcov
 
+    - name: check tools ( Coverage )
+      run: doxygen -v && dot -V && lcov -v
+
     - name: Configure ( Coverage )
       run: cmake -S . -Bbuild -DCMAKE_BUILD_TYPE=Coverage
 
