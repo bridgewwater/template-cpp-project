@@ -1,0 +1,47 @@
+# https://docs.drone.io/pipeline/docker/examples/
+kind: pipeline
+type: docker
+name: cmake-docker
+
+# platform: # https://docs.drone.io/yaml/docker/#the-platform-object
+#   os: windows
+#   arch: amd64
+
+node: # https://docs.drone.io/yaml/docker/#the-node-attribute
+  # DRONE_RUNNER_LABELS https://docs.drone.io/runner/exec/configuration/reference/drone-runner-labels/
+  # https://docs.drone.io/pipeline/exec/syntax/routing/
+  # role: xxxx # Specify the runner DRONE_RUNNER_LABELS labeled `role:xxxx` to execute the pipeline
+  # DRONE_RUNNER_LABELS=docker_os:linux,docker_arch:amd64
+  docker_os: linux   # install docker linux with amd64
+  docker_arch: amd64
+  # biz: web-front-end # web-api web-front-end cli-tools
+
+steps:
+  - name: env-init
+    image: alpine:3.17
+    pull: if-not-exists
+    commands:
+      - "echo \"=> base  info\nDRONE_STAGE_MACHINE    ${DRONE_STAGE_MACHINE}\nDRONE_STAGE_OS         ${DRONE_STAGE_OS}\nDRONE_STAGE_ARCH       ${DRONE_STAGE_ARCH}\""
+      - "echo \"=> drone info\nDRONE_WORKSPACE        ${DRONE_WORKSPACE}\nDRONE_REPO_NAME        ${DRONE_REPO_NAME}\nDRONE_REPO_OWNER       ${DRONE_REPO_OWNER}\nDRONE_REPO             ${DRONE_REPO}\""
+      - "echo \"=> cvs   info\nDRONE_BRANCH           ${DRONE_BRANCH/\\//-}\nDRONE_COMMIT_SHA short ${DRONE_COMMIT_SHA:0:8}\nDRONE_TAG              ${DRONE_TAG##v}\""
+  - name: cmake-init
+    image: sinlov/docker-cpp-boilerplate:11.7.0-debian # https://hub.docker.com/r/sinlov/docker-cpp-boilerplate/tags
+    pull: if-not-exists
+    commands:
+      - cmake --version
+      - gcc -v
+      - g++ -v
+      - doxygen -v
+      - dot -V
+
+trigger: # https://docs.drone.io/pipeline/triggers/
+  # branch:
+  #   - main
+  event:
+    - cron
+    - custom
+    - push
+    - pull_request
+    - tag
+    - promote
+    - rollback
